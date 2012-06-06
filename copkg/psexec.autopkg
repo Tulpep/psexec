@@ -1,0 +1,52 @@
+@import "version.inc";
+@import "compat.inc";
+@import "outercurve.inc";
+
+package {
+    name: "psexec";
+    version: "${package-version}";
+    arch : "any";
+    display-name: "Sysinternals PsExec";
+}
+
+metadata {
+    summary: "Windows Sysinternals' PsExec";
+    description: @"PsExec is a light-weight telnet-replacement that lets you execute processes on other systems, complete with full interactivity for console applications, without having to manually install client software. PsExec's most powerful uses include launching interactive command-prompts on remote systems and remote-enabling tools like IpConfig that otherwise do not have the ability to show information about remote systems.";
+    
+    author-version : "v1.98";
+    bug-tracker:
+      "http://forum.sysinternals.com/pstools_forum8.html";
+    stability : "0";
+    licenses : {
+        eula
+    };
+}
+
+files[readme] {
+    root: @"..\";
+  
+    include: {
+        "readme.txt"
+    };
+    
+    trim-path: all;
+};
+
+faux-pax {
+    downloads : {
+       "psexec.exe" = "http://live.sysinternals.com/psexec.exe",
+    };
+    
+    // install: { commmand = "", parameters = "" };
+    // remove: { commmand = "", parameters = "" };
+    
+    include : {
+        readme
+    };
+}
+
+package-composition {
+    shortcut : { 
+      @"${bin}\psexec" = @"${packagedir}\psexec.exe";
+    };
+}
